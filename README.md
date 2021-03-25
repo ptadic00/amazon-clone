@@ -1,1 +1,1 @@
-Amazon clone challenge by Clever Programmer part of 5 days React challenge.
+Amazon clone challenge by Clever Programmer, as a part of their 5 days ReactJS challenge.
