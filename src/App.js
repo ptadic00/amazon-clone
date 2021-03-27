@@ -5,9 +5,11 @@ import Cart from './Cart'
 import Home from './Home'
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import styled from 'styled-components'
-import {db} from './firebase'
+import {auth, db} from './firebase'
+import Login from './login'
 
 function App() {
+  const[user, setUser] =useState(JSON.parse(localStorage.getItem('user')));
   const [cartItems, setcartItems]=useState([]);
 
   const getCartItems=()=>{
@@ -20,6 +22,13 @@ function App() {
     })
   }
 
+  const signOut=()=>{
+    auth.signOut().then(()=>{
+      localStorage.removeItem('user')
+      setUser(null)
+    })
+  }
+
   useEffect(()=>{
     	getCartItems();
   }, [])
@@ -28,9 +37,17 @@ function App() {
 
   return (
     <Router>
+      {
+        !user ? (
+        <Login setUser={setUser}/>
+        ):(
       <Container>
-        <Header/>
+        <Header 
+          user={user}
+          cartItems={cartItems}
+          signOut={signOut}/>
         <Switch>
+
           <Route path="/cart">
             <Cart cartItems={cartItems}/>
           </Route>
@@ -38,6 +55,8 @@ function App() {
           <Route path="/"><Home/></Route>
         </Switch>
       </Container>
+      )
+    }
     </Router>
   );
 }

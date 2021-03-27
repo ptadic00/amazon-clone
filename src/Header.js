@@ -5,7 +5,19 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import {Link} from 'react-router-dom'
 
-const Header = () => {
+function Header ({cartItems, user, signOut}) {
+
+    const getCount=()=>{
+        let count=0;
+        //loop through all cart items
+        cartItems.forEach((item) => {
+            //add the qty of the cart item to total
+            count+=item.product.quantity
+        })
+
+        return count;
+    }
+
     return (
         <Container>
             <HeaderLogo>
@@ -17,7 +29,7 @@ const Header = () => {
             <HeaderOptionAdress>
                 <LocationOnIcon/>
                 <HeaderOption>
-                    <OptionLineOne>Hello,</OptionLineOne>
+                    <OptionLineOne>Hello, {user.name}!</OptionLineOne>
                     <OptionLineTwo>Select your adress</OptionLineTwo>
                 </HeaderOption>
             </HeaderOptionAdress>
@@ -31,8 +43,8 @@ const Header = () => {
 
             <HeaderNavItems>
 
-                <HeaderOption>
-                    <OptionLineOne>Hello, Petra</OptionLineOne>
+                <HeaderOption onClick={signOut}>
+                    <OptionLineOne>Hello, {user.name}</OptionLineOne>
                     <OptionLineTwo>Accounts & Lists</OptionLineTwo>
                 </HeaderOption>
 
@@ -45,7 +57,7 @@ const Header = () => {
                 <HeaderOptionCard>
                     <Link to="/cart">
                         <ShoppingCartIcon/>
-                        <CartCounter>4</CartCounter>
+                        <CartCounter>{getCount()}</CartCounter>
                     </Link>
                 </HeaderOptionCard>
             </HeaderNavItems>
@@ -120,6 +132,7 @@ const HeaderSearchIconContainer=styled.div`
 
 const HeaderOption =styled.div`
     padding: 10px 9px;
+    cursor: pointer;
 `
 
 const HeaderNavItems =styled.div`

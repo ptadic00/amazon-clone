@@ -75,5 +75,5 @@ const Content=styled.div`
     padding-right:10px;
     margin-top: -350px;
     display:flex;
-    flex-wrap:wrap-reverse;
+    flex-wrap:wrap;
 `

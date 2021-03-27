@@ -63,7 +63,7 @@ const Container=styled.div`
     display:flex;
     flex-direction:column;
     border-radius:7px;
-    flex: 1 0 25%;
+    flex: 1 0 20%;
 `
 
 const Title=styled.span`
