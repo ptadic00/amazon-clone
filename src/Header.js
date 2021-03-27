@@ -140,4 +140,6 @@ const HeaderOptionCard=styled.div`
 
 const CartCounter =styled.div`
     padding-left: 4px;
+    font-weight:700;
+    color:#f08804;
 `
